@@ -1,0 +1,9 @@
+git config --user.name iiscsanjay
+git confir --user.email iet.sanjay@gmail.com
+git init
+git add .
+git add -u .
+git add -A
+git rm Checklist
+git rm --cache Checklist
+
