@@ -6,4 +6,93 @@ git add -u .
 git add -A
 git rm Checklist
 git rm --cache Checklist
+1. Export changes done in last commit
+    git archive -o ../updated.zip HEAD $(git diff --name-only HEAD^)  
+2. Export changed files between two commits
+    git archive -o ../latest.zip NEW_COMMIT_ID_HERE $(git diff --name-only OLD_COMMIT_ID_HERE NEW_COMMIT_ID_HERE)   
+3.  Clone a specific remote branch
+    git init  
+    git remote add -t BRANCH_NAME_HERE -f origin REMOTE_REPO_URL_PATH_HERE  
+    git checkout BRANCH_NAME_HERE 
+4. Start a new Branch with No History
+    git checkout --orphan NEW_BRANCH_NAME_HERE  
+
+5. Checkout File from Other Branch without Switching Branches
+    git checkout BRANCH_NAME_HERE -- PATH_TO_FILE_IN_BRANCH_HERE   
+
+6. Pull with rebase instead of merge
+    git pull --rebase 
+    always rebasing configuration
+    git config branch.BRANCH_NAME_HERE.rebase true 
+
+git checkout a1e8fb5 hello.py
+git checkout HEAD hello.py
+
+# Commit a snapshot
+# git commit -m "Make some changes that will be undone"
+#
+# # Revert the commit we just created
+# git revert HEAD
+# 
+git reset --hard <commit>
+#Perform a “dry run” of git clean. This will show you which files are going to 
+#be removed without actually doing it.
+git clean -n
+#Remove untracked files from the current directory. The -f (force) flag is required unless the clean.requireForce configuration option is set to false (it's true by default). This will not remove untracked folders or files specified by .gitignore.
+git clean -f
+#Remove untracked files, but limit the operation to the specified path.
+git clean -f <path>
+#Remove untracked files and untracked directories from the current directory.
+git clean -df
+#Remove untracked files from the current directory as well as any files that Git usually ignores.
+git clean -xf
+
+git remote
+List the remote connections you have to other repositories.
+
+git remote -v
+Same as the above command, but include the URL of each connection.
+
+git remote add <name> <url>
+Create a new connection to a remote repository. After adding a remote, you’ll be able to use <name> as a convenient shortcut for <url> in other Git commands.
+
+git remote rm <name>
+Remove the connection to the remote repository called <name>.
+
+git remote rename <old-name> <new-name>
+Rename a remote connection from <old-name> to <new-name>.
+
+The git fetch command imports commits from a remote repository into your local 
+repo. The resulting commits are stored as remote branches instead of the normal 
+local branches that we’ve been working with. This gives you a chance to review 
+changes before integrating them into your copy of the project.
+
+Usage
+git fetch <remote>
+Fetch all of the branches from the repository. This also downloads all of the required commits and files from the other repository.
+
+git fetch <remote> <branch>
+Same as the above command, but only fetch the specified branch.
+
+
+git branch -r
+# origin/master
+# # origin/develop
+# # origin/some-feature
+#
+git pull
+
+Merging upstream changes into your local repository is a common task in Git-based collaboration workflows. We already know how to do this with git fetch followed by git merge, but git pull rolls this into a single command.
+
+Usage
+git pull <remote>
+Fetch the specified remote’s copy of the current branch and immediately merge it into the local copy. This is the same as git fetch <remote> followed by git merge origin/<current-branch>.
+
+git pull --rebase <remote>
+Same as the above command, but instead of using git merge to integrate the remote branch with the local one, use git rebase.
+
+Discussion
+You can think of git pull as Git's version of svn update. It’s an easy way to synchronize your local repository with upstream changes. The following diagram explains each step of the pulling process.
+
+
 
